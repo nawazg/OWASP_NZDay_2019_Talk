@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Yours Vue.js App"/>
+    <PineappleSelector/>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import PineappleSelector from "./components/PineappleSelector.vue";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    PineappleSelector
   }
 };
 </script>
@@ -20,7 +20,6 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
