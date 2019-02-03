@@ -60,8 +60,10 @@ export default {
       this.showSelection = false;
     },
     getDirectory() {
-      const fileSystem = require("fs");
-      this.directories = fileSystem.reaaddir("/");
+      this.directories = window.fileSystem.readdirSync("/", {
+        encoding: "utf8",
+        withFileTypes: false
+      });
     }
   }
 };
