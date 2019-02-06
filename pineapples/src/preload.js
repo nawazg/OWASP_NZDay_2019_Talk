@@ -1,15 +1,16 @@
-var fileSystem = require('fs');
-var remote = require('electron');
-console.log('hasRun')
-function getFileContents() {
-    var contents = fileSystem.readFileSync(
-        '/Users/nawaz/Documents/Projects/Some_cool_data_you_need.txt',
-        'utf8'
-    );
-    console.log(contents);
-    return remote.app.getFileContents;
-};
+const { remote } = require('electron');
+const fileSystem = require('fs');
+const path = require('path');
 
-window.interop = {
-    gfc = getFileContents
+require('electron-compile/lib/initialize-renderer').initializeRendererProcess(remote.getGlobal('globalCompilerHost').readOnlyMode);
+
+window.interopAPI = {
+    getSaferContent: () => {
+        var content = fileSystem.readFileSync(
+            path.join(__dirname, 'SafeContent.txt'),
+            'utf8'
+        );
+
+        return content;
+    }
 };

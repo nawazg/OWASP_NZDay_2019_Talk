@@ -13,11 +13,10 @@ const createWindow = () => {
         height: 600,
         webPreferences: {
             nodeIntegration: false,
-            contextIsolation: true,
             preload: path.join(__dirname, 'preload.js')
         }
     });
-    mainWindow.loadURL('http://pineapplemachinestore.z8.web.core.windows.net/');
+    mainWindow.loadURL('https://pineapplemachinestore.z8.web.core.windows.net/');
     mainWindow.webContents.openDevTools();
     mainWindow.on('closed', () => {
         mainWindow = null;
