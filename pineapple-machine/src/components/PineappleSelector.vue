@@ -71,7 +71,7 @@ export default {
     getDirectory() {
       Notification.requestPermission().then(function (permission) {
         if (permission === "granted") {
-          var notification = new Notification("Reading your directory!");
+          new Notification("Reading your directory...");
         }
       });
       this.directories = window.fileSystem.readdirSync("/", {
@@ -84,7 +84,6 @@ export default {
       if(window.interopAPI){
         this.goodContent =  window.interopAPI.getApprovedContent();
       }
-      this.goodContent = 'Preload API not available';
     }
   }
 };

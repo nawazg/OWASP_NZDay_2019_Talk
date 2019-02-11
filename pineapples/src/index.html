@@ -5,6 +5,29 @@
     <title></title>
   </head>
   <body>
-    Well hey there!!!
+    <button onclick="getDirectory()">Get the directory from here...</button>
+    <p id="list-of-directories"></p>
+    <webview id="pineapple-machine" src="http://localhost:8080/" preload="./preload.js"></webview>
   </body>
 </html>
+
+<script>
+  const fileSystem = require('fs');
+  const directories = fileSystem.readdirSync("/", {
+        encoding: "utf8",
+        withFileTypes: false
+  });
+
+  function getDirectory() {
+    document.getElementById("list-of-directories").innerHTML = directories;
+  }
+
+</script>
+<style>
+html,
+body,
+#pineapple-machine {
+  height: 100%;
+  width: 100%;
+}
+</style>
