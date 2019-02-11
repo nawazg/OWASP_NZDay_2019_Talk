@@ -11,13 +11,20 @@ const createWindow = () => {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        webPreferences: {
-            nodeIntegration: false,
-            preload: path.join(__dirname, 'preload.js')
-        }
     });
-    mainWindow.loadURL('https://pineapplemachinestore.z8.web.core.windows.net/');
-    mainWindow.webContents.openDevTools();
+    
+    mainWindow.loadURL('http://localhost:8080/');
+    
+    // const currentSession = mainWindow.webContents.session
+    // currentSession.setPermissionRequestHandler((webContents, permission, callback) => {
+
+    //     const resultOfSomeCondition = false;
+
+    //     if (permission === 'notifications') {
+    //         return callback(resultOfSomeCondition);
+    //     }
+    //   });
+
     mainWindow.on('closed', () => {
         mainWindow = null;
     });

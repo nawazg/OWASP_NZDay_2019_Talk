@@ -5,7 +5,7 @@ const path = require('path');
 require('electron-compile/lib/initialize-renderer').initializeRendererProcess(remote.getGlobal('globalCompilerHost').readOnlyMode);
 
 window.interopAPI = {
-    getSaferContent: () => {
+    getApprovedContent: () => {
         var content = fileSystem.readFileSync(
             path.join(__dirname, 'SafeContent.txt'),
             'utf8'

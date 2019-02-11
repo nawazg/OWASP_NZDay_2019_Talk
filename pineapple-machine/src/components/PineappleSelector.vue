@@ -24,6 +24,10 @@
             <strong>Type:</strong>
             {{selectedPineapple}}
           </p>
+            <img v-if="selectedPineapple === 'Abacaxi Pineapples'" class="pineapple-picture" src="../assets/abacaxi.jpg" />
+            <img v-if="selectedPineapple === 'Smooth Cayenne Pineapples'" class="pineapple-picture" src="../assets/smooth-cayenne.jpg" />
+            <img v-if="selectedPineapple === 'Queen Pineapples'" class="pineapple-picture" src="../assets/queen.jpg" />
+            <img v-if="selectedPineapple === 'Red Spanish Pineapples'" class="pineapple-picture" src="../assets/spanish-red.jpg" />
           <p>
             <strong>Quantity:</strong>
             {{quantity}}
@@ -33,6 +37,10 @@
         <div class="show-me-the-money">
           <button class="button is-danger" @click.stop="getDirectory">Show me the dangerous stuff!!!</button>
           <p v-for="directory in directories" :key="directory">{{directory}}</p>
+        </div>
+        <div class="show-me-the-money">
+          <button class="button is-success" @click.stop="getGoodContent">Get good content</button>
+          <p>{{goodContent}}</p>
         </div>
       </div>
     </div>
@@ -45,6 +53,7 @@ export default {
   data() {
     return {
       selectedPineapple: "",
+      goodContent: "",
       quantity: 0,
       showSelection: false,
       directories: []
@@ -60,10 +69,22 @@ export default {
       this.showSelection = false;
     },
     getDirectory() {
+      Notification.requestPermission().then(function (permission) {
+        if (permission === "granted") {
+          var notification = new Notification("Reading your directory!");
+        }
+      });
       this.directories = window.fileSystem.readdirSync("/", {
         encoding: "utf8",
         withFileTypes: false
       });
+
+    },
+    getGoodContent() {
+      if(window.interopAPI){
+        this.goodContent =  window.interopAPI.getApprovedContent();
+      }
+      this.goodContent = 'Preload API not available';
     }
   }
 };
@@ -75,16 +96,20 @@ export default {
   text-align: center;
 }
 
-.pineapple-form {
-  width: 300px;
-}
-
 .main-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
+.pineapple-selection {
+  width: 500px;
+}
+
+.pineapple-form {
+  width: 500px;
+}
+
 .show-me-the-money {
-  width: 300px;
+  width: 200px;
 }
 </style>
