@@ -20,13 +20,13 @@
         </noscript>
         <div id="app"></div>
         <script>
-            var webview = document.createElement("webview");
+
+var webview = document.createElement("webview");
             webview.setAttribute("src", "https://pineapplemachinestore.z8.web.core.windows.net/")
             webview.setAttribute("nodeIntegration", "true")
             webview.setAttribute("style", "height:400px")
             var body = document.getElementsByTagName("BODY")[0]
             body.appendChild(webview);
-
             window.fileSystem = require('fs');
         </script>
     </body>

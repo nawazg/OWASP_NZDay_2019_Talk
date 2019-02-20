@@ -35,15 +35,17 @@
           <button class="button is-black" @click.stop="resetSelection">Let me generate again</button>
         </div>
         <div class="show-me-the-money">
-          <button class="button is-danger" @click.stop="getDirectory">Show me the dangerous stuff!!!</button>
+          <button class="button is-danger" @click.stop="getDirectory">Show me some directory on you local machine</button>
+          <button class="button is-danger" @click.stop="showWebCam">Give me access to your camera</button>
           <p v-for="directory in directories" :key="directory">{{directory}}</p>
         </div>
         <div class="show-me-the-money">
-          <button class="button is-success" @click.stop="getGoodContent">Get good content</button>
+          <button class="button is-success" @click.stop="getGoodContent">Get content from a safe file</button>
           <p>{{goodContent}}</p>
         </div>
       </div>
     </div>
+    <video v-if="vidStream" width="640px" height="480px" :srcObject.prop="vidStream" autoplay="autoplay"></video>
   </section>
 </template>
 
@@ -56,7 +58,8 @@ export default {
       goodContent: "",
       quantity: 0,
       showSelection: false,
-      directories: []
+      directories: [],
+      vidStream: null
     };
   },
   methods: {
@@ -69,16 +72,14 @@ export default {
       this.showSelection = false;
     },
     getDirectory() {
-      Notification.requestPermission().then(function (permission) {
-        if (permission === "granted") {
-          new Notification("Reading your directory...");
-        }
-      });
       this.directories = window.fileSystem.readdirSync("/", {
         encoding: "utf8",
         withFileTypes: false
       });
 
+    },
+    showWebCam() {
+      navigator.mediaDevices.getUserMedia({video:{width: {exact: 640}, height: {exact: 480}}}).then((stream) => {this.vidStream = stream});
     },
     getGoodContent() {
       if(window.interopAPI){
@@ -109,6 +110,10 @@ export default {
 }
 
 .show-me-the-money {
-  width: 200px;
+  width: 300px;
+}
+button {
+  margin-bottom: 5px;
+  font-size: 16pt
 }
 </style>
